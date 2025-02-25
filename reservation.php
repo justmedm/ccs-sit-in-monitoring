@@ -1,8 +1,7 @@
 <?php
 session_start();
-include 'db.php'; // Ensure db.php correctly connects to the database
+include 'db.php'; 
 
-// Check if the user is logged in
 if (!isset($_SESSION['username'])) {
     header("Location: login.php");
     exit();
@@ -10,44 +9,49 @@ if (!isset($_SESSION['username'])) {
 
 $username = $_SESSION['username'];
 
-// Fetch user details securely
-$sql = "SELECT lastname, firstname, middlename FROM users WHERE username = ?";
+$sql = "SELECT idno, lastname, firstname, middlename FROM users WHERE username = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $username);
 $stmt->execute();
 $result = $stmt->get_result();
 $user = $result->fetch_assoc();
 
-// Handle cases where no user is found
 if (!$user) {
     die("Error: User not found.");
 }
 
-// Ensure all variables are set before using them
+// Get ID Number
+$id_number = $user['idno'] ?? null;
 $full_name = trim(($user['firstname'] ?? '') . " " . (($user['middlename'] ?? '') ? $user['middlename'] . " " : '') . ($user['lastname'] ?? ''));
+
+// Debugging: Check if id_number is set
+if (!$id_number) {
+    die("Error: Missing ID Number from Database!");
+}
 
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $id_number = $_POST['id_number'];
+    $id_number = $_POST['id_number'] ?? $id_number; 
     $purpose = $_POST['purpose'];
     $lab = $_POST['lab'];
     $time_in = $_POST['time_in'];
     $date = $_POST['date'];
-    $session = $_POST['session']; // Allow user to input session
+    $session = $_POST['session'];
 
-    // Prepare SQL statement
+    if (!$id_number) {
+        die("Error: ID Number is missing in the form submission!");
+    }
+
     $sql = "INSERT INTO reservations (id_number, full_name, purpose, lab, time_in, date, remaining_session) VALUES (?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
     if (!$stmt) {
-        die("Error preparing SQL: " . $conn->error); // Debugging line
+        die("Error preparing SQL: " . $conn->error);
     }
 
     $stmt->bind_param("sssssss", $id_number, $full_name, $purpose, $lab, $time_in, $date, $session);
 
     if ($stmt->execute()) {
-        // Store the reserved session number in the user's session data
         $_SESSION['reserved_session'] = $session;
-        
         $_SESSION['success_message'] = "Reservation successful!";
         header("Location: dashboard.php");
         exit();
@@ -144,13 +148,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="form-container">
         <h2>Reservation Form</h2>
         <form method="POST" action="">
-            <input type="text" name="id_number" placeholder="ID Number" required>
+            <input type="text" name="id_number" placeholder="ID Number" value="<?php echo htmlspecialchars($id_number); ?>" readonly>
             <input type="text" name="full_name" placeholder="Student Name" value="<?php echo htmlspecialchars($full_name); ?>" readonly>
             <input type="text" name="purpose" placeholder="Purpose" required>
             <input type="text" name="lab" placeholder="Lab" required>
             <input type="time" name="time_in" placeholder="Time In" required>
             <input type="date" name="date" placeholder="Date" required>
-            <input type="number" name="session" placeholder="Session Number" required> <!-- Allow user to input session -->
+            <!-- Show session but prevent editing -->
+            <input type="number" value="30" readonly>
+            <input type="hidden" name="session" value="30">
             <button type="submit">Submit</button>
         </form>
     </div>

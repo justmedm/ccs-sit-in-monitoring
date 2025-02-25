@@ -61,7 +61,7 @@ if (isset($_SESSION['success_message'])) {
             align-items: center;
         }
 
-       /* Header */
+        /* Header */
         .header {
             background: #222;
             color: white;
@@ -70,69 +70,61 @@ if (isset($_SESSION['success_message'])) {
             align-items: center;
             padding: 15px 30px;
             width: 100%;
-            box-sizing: border-box; /* Ensures padding doesn't affect width */
+            box-sizing: border-box;
         }
 
-        /* Title Styling */
         .header-title {
             font-size: 24px;
             font-weight: bold;
-            margin: 0; /* Remove default margin */
-            display: flex;
-            align-items: center;
         }
 
-        /* Navigation Menu */
-        .nav-menu {
-            display: flex;
-            align-items: center; /* Ensure buttons align with the title */
-        }
-
-        /* Button Styling */
         .nav-menu button {
-            background: trasnparent;
+            background: transparent;
             color: white;
             border: none;
             padding: 10px 15px;
             cursor: pointer;
             font-size: 16px;
             border-radius: 5px;
-            display: flex;
-            align-items: center; /* Centers text inside buttons */
-            justify-content: center;
-            height: 40px; /* Ensures consistent button height */
+            height: 40px;
         }
 
-        /* Button Hover Effect */
         .nav-menu button:hover {
             background: #666;
         }
 
-
         /* Main content */
-        .content {
-            padding: 20px;
+        .content-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
             width: 100%;
-            max-width: 800px;
-            text-align: center;
+            max-width: 1200px;
+            margin-top: 20px;
+            gap: 20px;
         }
 
         .student-info {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-            text-align: left;
-            width: 100%;
-            max-width: 400px;
-            margin: 40px auto;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+        width: 100%;
+        max-width: 400px;
+        text-align: center; /* Keeps title and image centered */
         }
 
         .profile-title {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            text-align: center;
+            text-align: center; /* Keeps Profile Information centered */
+        }
+
+        .profile-details {
+            text-align: left; /* Aligns text to the left */
+            width: 100%;
+            padding: 10px 20px;
+        }
+        .student-info .p{
+            text-align: left;
         }
 
         .student-info img {
@@ -142,9 +134,33 @@ if (isset($_SESSION['success_message'])) {
             object-fit: cover;
             margin-bottom: 15px;
             border: 3px solid #222;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
+        }
+
+        /* Announcements and Rules Container */
+        .info-sections {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .announcement-section, .rules-section {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .announcement-item {
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+        }
+
+        .announcement-item:last-child {
+            border-bottom: none;
         }
 
         /* Logout Modal */
@@ -190,9 +206,7 @@ if (isset($_SESSION['success_message'])) {
         <div class="header-title">CCS Sit-in Monitoring</div>
         <div class="nav-menu">
             <button onclick="location.href='edit.php'">Edit</button>
-            <button onclick="location.href='announcement.php'">View Announcement</button>
             <button onclick="location.href='sitinrules.php'">Sit-in Rules</button>
-            <button onclick="location.href='LRR.php'">Lab Rules & Regulations</button>
             <button onclick="location.href='history.php'">History</button>
             <button onclick="location.href='reservation.php'">Reservation</button>
             <button onclick="openLogoutModal()">Logout</button>
@@ -200,16 +214,52 @@ if (isset($_SESSION['success_message'])) {
     </div>
 
     <!-- Main Content -->
-    <div class="content">
+    <div class="content-container">
+        <!-- Profile Information -->
         <div class="student-info">
             <h3 class="profile-title">Profile Information</h3>
             <img src="images/<?php echo !empty($user['profile_image']) ? $user['profile_image'] : 'cat.jpg'; ?>" alt="Profile Picture">
+            <div class="profile-details">
             <p><strong>Name:</strong> <?php echo htmlspecialchars($full_name); ?></p>
             <p><strong>Course:</strong> <?php echo htmlspecialchars($course); ?></p>
             <p><strong>Year:</strong> <?php echo htmlspecialchars($year); ?></p>
             <p><strong>Email:</strong> <?php echo htmlspecialchars($email); ?></p>
             <p><strong>Address:</strong> <?php echo htmlspecialchars($address); ?></p>
             <p><strong>Reserved Session:</strong> <?php echo htmlspecialchars($reserved_session); ?></p>
+        </div>
+    </div>
+        <!-- Announcements -->
+            <div class="announcement-section">
+                <h2>📢 Announcement</h2>
+                <div class="announcement-container">
+                    <div class="announcement-item">
+                        <strong>CCS Admin | 2025-Feb-25</strong>
+                        <p>UC did it again.</p>
+                    </div>
+                    <div class="announcement-item">
+                        <strong>CCS Admin | 2025-Feb-03</strong>
+                        <p>The College of Computer Studies will open the registration of students for the Sit-in privilege starting tomorrow. Thank you! <br> <em>Lab Supervisor</em></p>
+                    </div>
+                    <div class="announcement-item">
+                        <strong>CCS Admin | 2024-May-08</strong>
+                        <p><strong>Important Announcement:</strong> We are excited to announce the launch of our new website! 🎉 Explore our latest products and services now!</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Rules & Regulations -->
+            <div class="rules-section">
+                <h2>📜 Rules and Regulations</h2>
+                <h3>University of Cebu</h3>
+                <h4>COLLEGE OF INFORMATION & COMPUTER STUDIES</h4>
+                <p><strong>LABORATORY RULES AND REGULATIONS</strong></p>
+                <ul>
+                    <li>Maintain silence, decorum, and discipline inside the lab.</li>
+                    <li>Games are not allowed inside the lab.</li>
+                    <li>Internet surfing is allowed only with the instructor’s permission.</li>
+                </ul>
+            </div>
         </div>
     </div>
 
