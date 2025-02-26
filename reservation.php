@@ -75,9 +75,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             margin: 0;
             padding: 0;
             height: 100vh; /* Ensures the body takes the full height of the viewport */
+            background: #2a3d4f;
         }
         .header {
-            background: #222;
+            background: #F8F1E7;
             color: white;
             display: flex;
             align-items: center;
@@ -120,10 +121,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
         .form-container input, .form-container select {
             width: 100%;
-            padding: 10px;
+            padding: 12px; /* Consistent padding for all elements */
             margin-bottom: 15px;
             border: 1px solid #ccc;
             border-radius: 5px;
+            font-size: 16px; /* Ensure consistent font size */
+            box-sizing: border-box; 
         }
         .form-container button {
             width: 100%;

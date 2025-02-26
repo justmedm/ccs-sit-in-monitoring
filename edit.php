@@ -70,15 +70,14 @@ $conn->close();
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background: #f4f4f4;
+            background: #2a3d4f;
         }
         .header {
-            background: #222;
+            background: #F8F1E7;
             color: white;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 15px 20px;
             font-size: 24px;
             font-weight: bold;
             width: 100%;
@@ -101,16 +100,17 @@ $conn->close();
         }
         .container {
             background: white;
-            padding: 20px;
+            padding: 50px;
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
             width: 400px;
+            max-width: 600px; /* Increased max-width for a more spacious feel */
             text-align: left;
-            margin-top: 80px;
+            margin-top: 10%;
         }
         .container h2 {
             text-align: center;
-            margin-bottom: 15px;
+            margin-bottom: 0;
         }
         .form-group {
             margin-bottom: 10px;
@@ -203,7 +203,6 @@ button:hover {
 
 <div class="header">
     <button onclick="window.location.href='dashboard.php'">← Back</button>
-    EDIT PROFILE
     <div></div> 
 </div>
 

@@ -32,17 +32,17 @@ $address = $user['address'] ?? 'Not Available';
 $session = $user['session'] ?? 'Not Available';
 
 // Profile image
-$profile_image = !empty($user['profile_image']) && $user['profile_image'] !== 'cat.jpg' 
-    ? 'images/' . htmlspecialchars($user['profile_image']) 
+$profile_image = !empty($user['profile_image']) && $user['profile_image'] !== 'cat.jpg'
+    ? 'images/' . htmlspecialchars($user['profile_image'])
     : 'cat.jpg';
 
-// Reserved session (not fully implemented)
+// Reserved session
 $reserved_session = $_SESSION['reserved_session'] ?? 'No session reserved';
 
 // Success message
 if (isset($_SESSION['success_message'])) {
     echo "<script>alert('" . $_SESSION['success_message'] . "');</script>";
-    unset($_SESSION['success_message']); 
+    unset($_SESSION['success_message']);
 }
 ?>
 
@@ -53,152 +53,155 @@ if (isset($_SESSION['success_message'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #2a3d4f; /* Beige background */
+}
 
-        /* Header */
-        .header {
-            background: #222;
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 30px;
-            width: 100%;
-            box-sizing: border-box;
-        }
+/* Header */
+.header {
+    background: #F8F1E7; /* Ivory */
+    color: #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    width: 100%;
+    box-sizing: border-box;
+    border-bottom: 2px solid #d2b48c; /* Darker beige border */
+}
 
-        .header-title {
-            font-size: 24px;
-            font-weight: bold;
-        }
+.header-title {
+    font-size: 24px;
+    font-weight: bold;
+}
 
-        .nav-menu button {
-            background: transparent;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            cursor: pointer;
-            font-size: 16px;
-            border-radius: 5px;
-            height: 40px;
-        }
+.nav-menu button {
+    background: #d2b48c; /* Darker beige */
+    color: black;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    height: 40px;
+}
 
-        .nav-menu button:hover {
-            background: #666;
-        }
+.nav-menu button:hover {
+    background: #b59f7a; /* Even darker beige on hover */
+}
 
-        /* Main content */
-        .content-container {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            width: 100%;
-            max-width: 1200px;
-            margin-top: 20px;
-            gap: 20px;
-        }
+/* Main content */
+.content-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 20px;
+    gap: 20px;
+}
 
-        .student-info {
-        background: white;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-        width: 100%;
-        max-width: 400px;
-        text-align: center; /* Keeps title and image centered */
-        }
+.student-info, .announcement-section, .rules-section {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 400px;
+    text-align: center; /* Keeps title and image centered */
+}
 
-        .profile-title {
-            text-align: center; /* Keeps Profile Information centered */
-        }
+.profile-title {
+    text-align: center; /* Keeps Profile Information centered */
+}
 
-        .profile-details {
-            text-align: left; /* Aligns text to the left */
-            width: 100%;
-            padding: 10px 20px;
-        }
-        .student-info .p{
-            text-align: left;
-        }
+.profile-details {
+    text-align: left; /* Aligns text to the left */
+    width: 100%;
+    padding: 10px 20px;
+}
 
-        .student-info img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 15px;
-            border: 3px solid #222;
-        }
+.student-info .p {
+    text-align: left;
+}
 
-        /* Announcements and Rules Container */
-        .info-sections {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            flex: 1;
-            max-width: 600px;
-        }
+.student-info img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 3px solid #d2b48c; /* Darker beige border */
+}
 
-        .announcement-section, .rules-section {
-            background: white;
-            border-radius: 10px;
-            padding: 15px;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-            max-height: 400px;
-            overflow-y: auto;
-        }
+/* Announcements and Rules Container */
+.info-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 1;
+}
 
-        .announcement-item {
-            border-bottom: 1px solid #ddd;
-            padding: 10px 0;
-        }
+.announcement-section, .rules-section {
+    background: white;
+    border-radius: 10px;
+    padding: 41px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    max-height: 400px;
+    overflow-y: auto;
+}
 
-        .announcement-item:last-child {
-            border-bottom: none;
-        }
+.announcement-item {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
 
-        /* Logout Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-        }
+.announcement-item:last-child {
+    border-bottom: none;
+}
 
-        .modal-content {
-            background: white;
-            padding: 20px;
-            border-radius: 5px;
-            text-align: center;
-            width: 300px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-        }
+/* Logout Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
 
-        button {
-            padding: 10px 20px;
-            margin: 10px;
-            background: #444;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    width: 300px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
 
-        button:hover {
-            background: #666;
-        }
-    </style>
+button {
+    padding: 10px 20px;
+    margin: 10px;
+    background: #d2b48c; /* Darker beige */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #b59f7a; /* Even darker beige on hover */
+}
+</style>
+
 </head>
 <body>
     <!-- Header -->
@@ -255,6 +258,12 @@ if (isset($_SESSION['success_message'])) {
                 <h4>COLLEGE OF INFORMATION & COMPUTER STUDIES</h4>
                 <p><strong>LABORATORY RULES AND REGULATIONS</strong></p>
                 <ul>
+                    <li>Maintain silence, decorum, and discipline inside the lab.</li>
+                    <li>Games are not allowed inside the lab.</li>
+                    <li>Internet surfing is allowed only with the instructor’s permission.</li>
+                    <li>Maintain silence, decorum, and discipline inside the lab.</li>
+                    <li>Games are not allowed inside the lab.</li>
+                    <li>Internet surfing is allowed only with the instructor’s permission.</li>
                     <li>Maintain silence, decorum, and discipline inside the lab.</li>
                     <li>Games are not allowed inside the lab.</li>
                     <li>Internet surfing is allowed only with the instructor’s permission.</li>

@@ -36,62 +36,81 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Login</title>
 <style>
-body {
-font-family: Arial, sans-serif;
-display: flex;
-justify-content: center;
-align-items: center;
-height: 100vh;
-background-color: #f4f4f4;
-}
-.header{
-display: flex;
-justify-content: space-between;
-align-content: center;
-background-color: f1f1f1;
-}
-.logo-left, .logo-right{
-max-width: 150px;
-height: auto;
-}
-h2{
-text-align: center;
-flex-grow: 1;
-font-size: 24px;
-margin: 0;
-padding-top: 50px;
-}
+    body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #2a3d4f; /* Beige background */
+    }
 
-.container {
-background: white;
-padding: 100px;
-border-radius: 10px;
-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-text-align: center;
-}
-input {
-width: 100%;
-padding: 10px;
-margin: 10px 0;
-border: 1px solid #ccc;
-border-radius: 5px;
-}
-button {
-width: 100%;
-padding: 10px;
-background: blue;
-color: white;
-border: none;
-border-radius: 5px;
-cursor: pointer;
-}
-a {
-display: block;
-margin-top: 10px;
-text-decoration: none;
-color: black;
-}
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-content: center;
+        background-color: #fffff0; /* Ivory */
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo-left, .logo-right {
+        max-width: 150px;
+        height: auto;
+    }
+
+    h2 {
+        text-align: center;
+        flex-grow: 1;
+        font-size: 24px;
+        margin: 0;
+        padding-top: 50px;
+        color: black; /* Darker beige */
+    }
+
+    .container {
+        background: white;
+        padding: 50px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+        text-align: center;
+    }
+
+    input {
+        width: 96%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #d2b48c; /* Darker beige */
+        border-radius: 5px;
+    }
+
+    button {
+        width: 100%;
+        padding: 10px;
+        background: #d2b48c; /* Darker beige */
+        color: black;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #b59f7a; /* Even darker beige on hover */
+    }
+
+    a {
+        display: block;
+        margin-top: 10px;
+        text-decoration: none;
+        color:black; /* Darker beige */
+    }
+
+    a:hover {
+        color: #b59f7a; /* Even darker beige on hover */
+    }
 </style>
+
 </head>
 <body>
 <div class="container">

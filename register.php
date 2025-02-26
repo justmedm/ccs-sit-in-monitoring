@@ -31,46 +31,70 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Register</title>
 <style>
-form {
-    width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-}
-.container {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-input, select {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-button {
-    width: 100%;
-    padding: 10px;
-    background: green;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-a {
-    display: block;
-    margin-top: 10px;
-    text-decoration: none;
-    color: black;
-}
+    body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #2a3d4f; /* Beige background */
+    }
+
+    form {
+        width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #d2b48c; /* Darker beige */
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #fffff0; /* Ivory */
+    }
+
+    .container {
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    input, select {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #d2b48c; /* Darker beige */
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    button {
+        width: 100%;
+        padding: 10px;
+        background: #d2b48c; /* Darker beige */
+        color: black;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #b59f7a; /* Even darker beige on hover */
+    }
+
+    a {
+        display: block;
+        margin-top: 10px;
+        text-decoration: none;
+        color: white; /* Darker beige */
+    }
+
+    a:hover {
+        color: #b59f7a; /* Even darker beige on hover */
+    }
+
+    h2 {
+        color: white; /* Darker beige */
+    }
 </style>
+
 </head>
 <body>
 <div class="container">
